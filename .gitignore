@@ -1,2 +1,4 @@
 /Pipfile.lock
 /.venv
+*.pyc
+*.pyo
