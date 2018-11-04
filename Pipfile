@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 django = "==1.11.15"
+"argon2-cffi" = "*"
 
 [dev-packages]
 
