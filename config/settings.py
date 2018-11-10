@@ -37,10 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'accounts',
     'allauth',
-    'allauth.account'
+    'allauth.account',
 ]
+
+SITE_ID = 1
 
 AUTHNTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
