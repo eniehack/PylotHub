@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'allauth',
+    'allauth.account'
+]
+
+AUTHNTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
