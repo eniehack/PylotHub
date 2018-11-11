@@ -41,11 +41,12 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
 
-    user_id = models.UUIDField(_('user id'), default=uuid.uuid4, editable=False, unique=True, primary_key=True)
+    uuid = models.UUIDField(_('uuid'), default=uuid.uuid4, editable=False, unique=True, primary_key=True)
+    userid = models.CharField(_('user id'), max_length=20, unique=True)
     email = models.EmailField(_('email address'), unique=True)
-    user_name = models.CharField(_('user name'), max_length=150)
+    username = models.CharField(_('user name'), max_length=150)
     twitter = models.CharField('Twitter', max_length=15, null=True, blank=True)
-    homepage = models.URLField('homepage', null=True, blank=True)
+    homepage = models.URLField(_('homepage'), null=True, blank=True)
 
     is_staff = models.BooleanField(
         _('staff status'),
@@ -60,18 +61,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     EMAIL_FIELD = 'email'
-    USERNAME_FIELD = 'user_id'
-    REQUIRED_FIELDS = ['email','user_name']
+    USERNAME_FIELD = 'userid'
+    REQUIRED_FIELDS = ['email','username']
 
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
 
     def get_full_name(self):
-        return self.user_name
+        return self.username
 
     def get_short_name(self):
-        return self.user_name
+        return self.username
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
