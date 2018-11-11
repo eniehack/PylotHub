@@ -1,0 +1,7 @@
+{% block content %}
+<form method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Sign in</button>
+</form>
+{% endblock %}
