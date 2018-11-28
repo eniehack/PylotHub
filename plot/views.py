@@ -1,16 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import (
-    DetailView,
-    CreateView, 
-    UpdateView, 
-    DeleteView,
-    TemplateView,
-    ListView
-)
+from .models import Plot
+from django.views.generic import \
+    DetailView, CreateView, UpdateView, DeleteView, TemplateView, ListView
 
 
 class Index(TemplateView):
-    pass
+    template_name = 'plot/index.html'
 
 index = Index.as_view()
 
@@ -35,7 +30,6 @@ class DeletePlot(DeleteView):
 delete_plot = DeletePlot.as_view()
 
 class SearchPlot(ListView):
-    
-    model = Plot
+    pass
 
 search_plot = SearchPlot.as_view()
