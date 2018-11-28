@@ -7,8 +7,11 @@ create plot
 <p>create a new plot.</p>
 {% if user.is_authenticated %}
     <form action="{% url 'plot:create' %}" method="post">
-        {{ form }}
         {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="hidden" name="user_id" value="{{user.uuid}}">
         <button type="submit">Send</button>
     </form>
 {% else %}

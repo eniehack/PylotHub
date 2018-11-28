@@ -7,4 +7,5 @@ class CreateForm(forms.ModelForm):
 
     class Meta:
         model = Plot
-        fields = ['title', 'genre', 'content']
+        fields = ['user_id', 'title', 'genre', 'content']
+        widgets = {'user_id': forms.HiddenInput()}
