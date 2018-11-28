@@ -1,11 +1,17 @@
 {% extends "plot/base.html" %}
+{% load account %}
 {% block title %}
 create plot
 {% endblock %}
 {% block content %}
 <p>create a new plot.</p>
-<form action="" method="POST">
-    {{ form }}
-    <button type="submit">Send</button>
-</form>
-{% endblock%}
+{% if user.is_authenticated %}
+    <form action="{% url 'plot:create' %}" method="post">
+        {{ form }}
+        {% csrf_token %}
+        <button type="submit">Send</button>
+    </form>
+{% else %}
+    <p>Please login <a href="{% url 'account:signin' %}">here</a>
+{% endif %}
+{% endblock %}
