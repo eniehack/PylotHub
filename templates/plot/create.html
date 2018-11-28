@@ -1,2 +1,11 @@
+{% extends "plot/base.html" %}
+{% block title %}
+create plot
+{% endblock %}
+{% block content %}
 <p>create a new plot.</p>
-{{ form }}
+<form action="" method="POST">
+    {{ form }}
+    <button type="submit">Send</button>
+</form>
+{% endblock%}

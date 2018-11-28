@@ -1,3 +1,11 @@
+{% extends "plot/base.html" %}
+
+{% block title %}
+Plot Market index - Plothub
+{% endblock %}
+
+{% block content %}
 <p>This is Plot app index page.</p>
 <a href="{% url 'plot:create' %}">Make a new plot.</a>
 <a href="{% url 'plot:search' %}">Search a plot.</a>
+{% endblock %}
