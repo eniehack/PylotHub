@@ -29,6 +29,7 @@ class CreatePlot(CreateView):
     success_url = reverse_lazy('plot:index')
 
     def form_valid(self, form):
+        form.instance.user_id = self.request.user
         result = super().form_valid(form)
         messages.success(self.request, 'have created your new post!')
         return result
