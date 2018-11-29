@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import \
     DetailView, CreateView, UpdateView, DeleteView, TemplateView, ListView
 
@@ -21,8 +22,10 @@ class ViewPlot(DetailView):
 view_plot = ViewPlot.as_view()
 
 
-class CreatePlot(CreateView):
+class CreatePlot(LoginRequiredMixin, CreateView):
 
+    # TODO: After successed signin, redirect here.
+    login_url = '/accounts/signin'
     model = Plot
     form_class = CreateForm
     template_name = 'plot/create.html'
