@@ -4,6 +4,7 @@
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
+        {% include "_message.html" %}
         <div id="content">
             {% block content %}{% endblock %}
         </div>
