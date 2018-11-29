@@ -16,7 +16,9 @@ index = Index.as_view()
 
 
 class ViewPlot(DetailView):
-    pass
+
+    model = Plot
+    template_name = 'plot/detail.html'
 
 
 view_plot = ViewPlot.as_view()
