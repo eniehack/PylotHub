@@ -1,5 +1,4 @@
 {% extends "plot/base.html" %}
-{% load account %}
 {% block title %}
 create plot
 {% endblock %}
@@ -11,7 +10,6 @@ create plot
         <table>
             {{ form.as_table }}
         </table>
-        <input type="hidden" name="user_id" value="{{user.uuid}}">
         <button type="submit">Send</button>
     </form>
 {% else %}
