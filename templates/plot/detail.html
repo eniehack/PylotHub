@@ -1,0 +1,7 @@
+{% extends 'plot/base.html' %}
+{% block content %}
+  <h2>{{ object.title }}</h2>
+  <p>作者: {{ object.user_id }}
+  <p>ジャンル: {{ object.get_genre_display }}</p>
+    {{ object.content|linebreaksbr }}
+{% endblock %}

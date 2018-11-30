@@ -58,7 +58,10 @@ delete_plot = DeletePlot.as_view()
 
 
 class SearchPlot(ListView):
-    pass
+
+    model = Plot
+    template_name = 'plot/list.html'
+    paginate_by = 10
 
 
 search_plot = SearchPlot.as_view()

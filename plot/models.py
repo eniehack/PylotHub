@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 import uuid
@@ -14,6 +15,7 @@ GENRE = (
     ('07', _('drama')),
 )
 
+
 class Plot(models.Model):
     plot_id = models.UUIDField(_('plot id'), primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     user_id = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,)
@@ -22,3 +24,6 @@ class Plot(models.Model):
     updated_at = models.DateTimeField(_('updated at'), auto_now=True)
     genre = models.CharField(_('genre'), max_length=2, choices=GENRE, default='00')
     content = models.TextField(_('content'))
+
+    def get_absolute_url(self):
+        return reverse('plot:details', kwargs={'pk': self.plot_id})

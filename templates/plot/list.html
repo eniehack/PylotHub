@@ -1,0 +1,14 @@
+{% extends 'plot/base.html' %}
+{% block content %}
+<ul>
+{% for object in object_list %}
+    <li>
+        <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+    </li>
+{% empty %}
+    <li>
+        <p>No plot.</p>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
