@@ -4,6 +4,8 @@
 {% for object in object_list %}
     <li>
         <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+        <p>作者:{{object.user_id}}</p>
+        <p>ジャンル:{{object.get_genre_display}}</p>
     </li>
 {% empty %}
     <li>

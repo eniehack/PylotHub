@@ -3,5 +3,11 @@
   <h2>{{ object.title }}</h2>
   <p>作者: {{ object.user_id }}
   <p>ジャンル: {{ object.get_genre_display }}</p>
+  <p>作成日時: {{ object.created_at|date }}</p>
+  <p>更新日時: {{ object.updated_at|date }}</p>
     {{ object.content|linebreaksbr }}
+  {% if request.user.uuid == object.pk %}
+  <a href="{{ object.plot_id }}/edit">編集する</a>
+  <a href="{{ object.plot_id }}/delete">削除する</a>
+  {% endif %}
 {% endblock %}
