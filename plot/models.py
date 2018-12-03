@@ -14,6 +14,7 @@ GENRE = (
     ('07', _('drama')),
 )
 
+
 class Plot(models.Model):
     plot_id = models.UUIDField(_('plot id'), primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     user_id = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,)

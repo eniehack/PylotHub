@@ -1,0 +1,14 @@
+{% extends "plot/base.html" %}
+{% block title %}
+create plot
+{% endblock %}
+{% block content %}
+<p>create a new plot.</p>
+    <form action="{% url 'plot:create' %}" method="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button type="submit">Send</button>
+    </form>
+{% endblock %}
