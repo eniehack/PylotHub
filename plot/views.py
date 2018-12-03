@@ -55,11 +55,10 @@ class EditPlot(OnlyWriterPermissionMixin, UpdateView):
 
     model = Plot
     form_class = CreateForm
-    template_name = 'plot/create.html'
-    success_url = reverse_lazy('plot:details')
+    template_name = 'plot/edit.html'
+    success_url = reverse_lazy('plot:index')
 
     def form_valid(self, form):
-        form.instance.user_id = self.request.user
         result = super().form_valid(form)
         messages.success(self.request, 'have updated your new post!')
         return result
@@ -69,6 +68,7 @@ edit_plot = EditPlot.as_view()
 
 
 class DeletePlot(OnlyWriterPermissionMixin, DeleteView):
+
     model = Plot
     template_name = 'plot/delete_confirm.html'
     success_url = reverse_lazy('plot:index')
