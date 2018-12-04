@@ -8,6 +8,7 @@ django = "==1.11.15"
 "argon2-cffi" = "*"
 django-allauth = "*"
 django-widget-tweaks = "*"
+markdown = "*"
 
 [dev-packages]
 django-extensions = "*"

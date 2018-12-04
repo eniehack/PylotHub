@@ -1,7 +1,9 @@
-
 {% extends "plot/base.html" %}
 {% block title %}
 create plot
+{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" />
 {% endblock %}
 {% block content %}
 <p>create a new plot.</p>
@@ -12,4 +14,10 @@ create plot
         </table>
         <button type="submit">Send</button>
     </form>
+{% endblock %}
+{% block script %}
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+var simplemde = new SimpleMDE();
+</script>
 {% endblock %}

@@ -5,7 +5,7 @@
   <p>ジャンル: {{ object.get_genre_display }}</p>
   <p>作成日時: {{ object.created_at|date }}</p>
   <p>更新日時: {{ object.updated_at|date }}</p>
-    {{ object.content|linebreaksbr }}
+    {{ object.get_content_as_markdown }}
   {% if request.user == object.user_id %}
   <a href="{{ object.plot_id }}/edit">編集する</a>
   <a href="{{ object.plot_id }}/delete">削除する</a>
