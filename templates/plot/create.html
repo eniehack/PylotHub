@@ -1,4 +1,5 @@
 {% extends "plot/base.html" %}
+{% load static %}
 {% block title %}
 create plot
 {% endblock %}
@@ -7,10 +8,10 @@ create plot
 {% endblock %}
 {% block content %}
 <p>create a new plot.</p>
-    <form action="{% url 'plot:create' %}" method="post">
+    <form action="{% url 'plot:create' %}" method="post" novalidate>
         {% csrf_token %}
         <table>
-            {{ form.as_table }}
+            {{ form.as_p }}
         </table>
         <button type="submit">Send</button>
     </form>
@@ -18,6 +19,6 @@ create plot
 {% block script %}
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 <script>
-var simplemde = new SimpleMDE();
+var simplemde = new SimpleMDE({ element: document.getElementById("id_content") });
 </script>
 {% endblock %}
