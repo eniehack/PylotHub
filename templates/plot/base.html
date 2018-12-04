@@ -2,11 +2,13 @@
 <html>
     <head>
         <title>{% block title %}{% endblock %}</title>
+        {% block stylesheet %}{% endblock %}
     </head>
     <body>
         {% include "_message.html" %}
         <div id="content">
             {% block content %}{% endblock %}
         </div>
+        {% block script %}{% endblock %}
     </body>
 </html>
