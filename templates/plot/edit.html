@@ -8,48 +8,7 @@ create plot
 {% endblock %}
 {% block content %}
 <p>create a new plot.</p>
-    <div class="ui form">
-        <form action="{% url 'plot:edit' pk=object.plot_id %}" method="post" novalidate>
-            {% csrf_token %}
-                <div class="field">
-                    <div class="field-label is-normal">
-                        <label class="label">title</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="control">
-                            {% render_field form.title placeholder="title" %}
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="field-label is-normal">
-                        <label class="label">Genre</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="control">
-                            <div class="select">
-                                {% render_field form.genre %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <div class="field">
-                <div class="field-label is-normal">
-                    <label class="label">content</label>
-                </div>
-                <div>
-                    <div class="field">
-                        <div class="control">
-                            {% render_field form.content class="textarea" %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="control">
-                <button class="button is-primary">Submit</button>
-            </div>
-        </form>
-    </div>
+{% include 'plot/editor.html' with action='plot:edit' pk=object.plot_id %}
 {% endblock %}
 {% block script %}
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
