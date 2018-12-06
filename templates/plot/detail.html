@@ -11,7 +11,9 @@
       <span class="tag is-link">{{ object.get_genre_display }}</span>
     </div>
 </section>
-{{ object.get_content_as_markdown }}
+<div class="content"> 
+  {{ object.get_content_as_markdown }}
+</div>
 <br />
 {% if request.user == object.user_id %}
 <div class="field is-grouped">
