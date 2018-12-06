@@ -1,20 +1,14 @@
 {% extends "plot/base.html" %}
-{% load static %}
+{% load widget_tweaks %}
 {% block title %}
-create plot
+プロットの新規作成- PlotHub
 {% endblock %}
 {% block stylesheet %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" />
 {% endblock %}
 {% block content %}
-<p>create a new plot.</p>
-    <form action="{% url 'plot:create' %}" method="post" novalidate>
-        {% csrf_token %}
-        <table>
-            {{ form.as_p }}
-        </table>
-        <button type="submit">Send</button>
-    </form>
+<h1 class="title">プロットの新規作成</h1>
+{% include 'plot/editor.html' with action='plot:create' %}
 {% endblock %}
 {% block script %}
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>

@@ -1,19 +1,14 @@
 {% extends "plot/base.html" %}
+{% load widget_tweaks %}
 {% block title %}
-create plot
+プロットの編集 - PlotHub
 {% endblock %}
 {% block stylesheet %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" />
 {% endblock %}
 {% block content %}
-<p>create a new plot.</p>
-    <form action="{% url 'plot:edit' pk=object.plot_id %}" method="post" novalidate>
-        {% csrf_token %}
-        <table>
-            {{ form.as_p }}
-        </table>
-        <button type="submit">Send</button>
-    </form>
+<h1 class="title">編集画面</h1>
+{% include 'plot/editor.html' with action='plot:edit' pk=object.plot_id %}
 {% endblock %}
 {% block script %}
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
