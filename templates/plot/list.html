@@ -1,16 +1,59 @@
 {% extends 'plot/base.html' %}
+{% block stylesheet %}
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+{% endblock %}
 {% block content %}
-<ul>
-{% for object in object_list %}
-    <li>
-        <a href="{% url 'plot:details' object.plot_id %}">{{ object.title }}</a>
-        <p>作者:{{object.user_id}}</p>
-        <p>ジャンル:{{object.get_genre_display}}</p>
-    </li>
-{% empty %}
-    <li>
-        <p>No plot.</p>
-    </li>
-{% endfor %}
-</ul>
+<div class="columns is-multiline is-desktop">
+    {% for object in object_list %}
+        <div class="column is-one-third">
+        <div class="box">
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <p class="title is-3">{{ object.title }}</p>
+                        <p class="subtitle is-6">作者:{{ object.user_id }}</p>
+                        <p class="subtitle is-6">ジャンル:{{ object.get_genre_display }}</p>
+                        <a href="{% url 'plot:details' object.plot_id %}">View Details</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+        </div>
+    {% empty %}
+        <li>
+            <p>No plot.</p>
+        </li>
+    {% endfor %}
+</div>
+{% if is_paginated %}
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li><a 
+                href="?{{ page_obj.previous_page_number.querystring }}"
+                    >previous</a>
+            </li>
+
+        {% endif %}
+        {% for link_page in page_obj.pages %}
+            {% if link_page %}
+                {% if link_page == page_obj.number %}
+                    <li class="active"><a href="">{{ link_page }}</a></li>
+                {% else %}
+                    <li><a 
+                                href="?{{ link_page.querystring  }}"
+                            >{{ link_page }}</a>
+                    </li>
+                {% endif %}
+            {% else %}
+                {# 省略された部分の表示内容 #}
+                <li class="disabled"><a href="#">...</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <li><a href="?{{ page_obj.next_page_number.querystring }}">next</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}
 {% endblock %}
