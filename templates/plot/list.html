@@ -58,18 +58,21 @@
                 {% if forloop.first %}
                     {% if page_obj.number == page_num %}
                         <li>
-                            <a class="pagination-link is-current" aria-label="Page {{ page_num }}" aria-current="page">
+                            <a class="pagination-link is-current" 
+                            aria-label="Page {{ page_num }}" aria-current="page">
                                 {{ page_num }}
                             </a>
                         </li>
                         <li>
-                            <a class="pagination-link" aria-label="Page {{ page_obj.next_page_number }}" aria-current="Goto page {{ page_obj.next_page_number }}">
+                            <a class="pagination-link" href="?page={{ page_obj.next_page_number }}"
+                            aria-label="Page {{ page_obj.next_page_number }}" aria-current="Goto page {{ page_obj.next_page_number }}">
                                 {{ page_obj.next_page_number }}
                             </a>
                         </li>
                     {% else %}
                         <li>
-                            <a class="pagination-link" href="?page={{ page_num }}" aria-label="Goto page {{ page_num }}">{{ page_num }}</a>
+                            <a class="pagination-link" href="?page={{ page_num }}" 
+                            aria-label="Goto page {{ page_num }}">{{ page_num }}</a>
                         </li>
                         <li><span class="pagination-ellipsis">&hellip;</span></li>
                     {% endif %}
