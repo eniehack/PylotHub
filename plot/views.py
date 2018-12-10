@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy
+from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import \
@@ -87,6 +88,17 @@ class SearchPlot(ListView):
     model = Plot
     template_name = 'plot/list.html'
     paginate_by = 10
+
+    def get_queryset(self):
+        object_list = self.model.objects.all().order_by('-updated_at')
+
+        q_keyword = self.request.GET.get('keyword')
+
+        if q_keyword is not None:
+            if len(q_keyword) != 0:
+                 object_list = object_list.filter(Q(content__contains=q_keyword) | Q(title__contains=q_keyword))
+        
+        return object_list
 
 
 search_plot = SearchPlot.as_view()
