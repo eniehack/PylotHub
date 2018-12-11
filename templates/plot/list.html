@@ -1,0 +1,127 @@
+{% extends 'plot/base.html' %}
+{% block stylesheet %}
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+{% endblock %}
+{% block content %}
+<form action="{% url 'plot:search' %}" method="get">
+    <div class="field">
+        <label class="label">キーワード検索</label>
+        <div class="control">
+            <input name="keyword" class="input" type="text" placeholder="キーワード検索">
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <button class="button is-link">Submit</button>
+        </div>
+    </div>
+</form>
+<div class="columns is-multiline is-desktop">
+    {% for object in object_list %}
+        <div class="column is-one-third">
+        <div class="box">
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <p class="title is-3">{{ object.title }}</p>
+                        <p class="subtitle is-6">作者:{{ object.user_id }}</p>
+                        <p class="subtitle is-6">ジャンル:{{ object.get_genre_display }}</p>
+                        <a href="{% url 'plot:details' object.plot_id %}">View Details</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+        </div>
+    {% empty %}
+        <li>
+            <p>No plot.</p>
+        </li>
+    {% endfor %}
+</div>
+  {% if is_paginated %}
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        {% if page_obj.has_previous %}
+            <a class="pagination-previous" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% else %}
+            <a class="pagination-previous" disabled>Previous</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a class="pagination-next" href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% else %}
+            <a class="pagination-next" disabled>Next</span>
+        {% endif %}
+        <ul class="pagination-list">
+        {% if paginator.num_pages < 6 %}
+            {% for page_num in paginator.page_range %}
+                {% if page_obj.number == page_num %}
+                    <li>
+                    <a class="pagination-link is-current" aria-label="Page {{ page_num }}" aria-current="page">
+                        {{ page_num }}
+                    </a>
+                    </li>
+                {% else %}
+                    <li>
+                    <a class="pagination-link" href="?page={{ page_num }}" aria-label="Goto page {{ page_num }}">{{ page_num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            {% for page_num in paginator.page_range %}
+                {% if forloop.first %}
+                    {% if page_obj.number == page_num %}
+                        <li>
+                            <a class="pagination-link is-current" 
+                            aria-label="Page {{ page_num }}" aria-current="page">
+                                {{ page_num }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="pagination-link" href="?page={{ page_obj.next_page_number }}"
+                            aria-label="Page {{ page_obj.next_page_number }}" aria-current="Goto page {{ page_obj.next_page_number }}">
+                                {{ page_obj.next_page_number }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a class="pagination-link" href="?page={{ page_num }}" 
+                            aria-label="Goto page {{ page_num }}">{{ page_num }}</a>
+                        </li>
+                        <li><span class="pagination-ellipsis">&hellip;</span></li>
+                    {% endif %}
+                {% elif page_num == paginator.num_pages %}
+                    <li><span class="pagination-ellipsis">&hellip;</span></li>
+                    {% if page_obj.number == page_num %}
+                        <li>
+                            <a class="pagination-link is-current" aria-label="Page {{ page_num }}" aria-current="page">
+                                {{ page_num }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a class="pagination-link" href="?page={{ page_num }}" aria-label="Goto page {{ page_num }}">{{ page_num }}</a>
+                        </li>
+                    {% endif %}
+                {% elif page_obj.number == page_num %}
+                    <li>
+                        <a class="pagination-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Page {{ page_obj.previous_page_number }}" aria-current="Goto page {{ page_obj.previous_page_number }}">
+                            {{ page_obj.previous_page_number }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="pagination-link is-current" href="?page={{ page_num }}" aria-label="Page {{ page_num }}" aria-current="page">
+                            {{ page_num }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="pagination-link" href="?page={{ page_obj.next_page_number }}" aria-label="Page {{ page_obj.next_page_number }}" aria-current="Goto page {{ page_obj.next_page_number }}">
+                            {{ page_obj.next_page_number }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        </ul>
+    </nav>
+  {% endif %}
+{% endblock %}

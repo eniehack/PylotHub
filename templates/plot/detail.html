@@ -1,0 +1,31 @@
+{% extends 'plot/base.html' %}
+{% block title %}
+詳細 - PlotHub
+{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">{{ object.title }}</h1>
+      <h4 class="subtitle">作:{{ object.user_id }}</h3>
+      <span class="tag is-link">{{ object.get_genre_display }}</span>
+    </div>
+</section>
+<div class="content"> 
+  {{ object.get_content_as_markdown }}
+</div>
+<br />
+{% if request.user == object.user_id %}
+<div class="field is-grouped">
+  <p class="control">
+    <a class="button is-link" href="{{ object.plot_id }}/edit">編集する</a>
+  </p>
+  <p class="control">
+    <a class="button is-danger" href="{{ object.plot_id }}/delete">削除する</a>
+  </p>
+</div>
+{% endif %}
+<br />
+<p>作成日時: {{ object.created_at|date }}</p>
+<p>更新日時: {{ object.updated_at|date }}</p>
+{% endblock %}

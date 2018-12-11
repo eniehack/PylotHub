@@ -5,8 +5,14 @@ name = "pypi"
 
 [packages]
 django = "==1.11.15"
+"argon2-cffi" = "*"
+django-allauth = "*"
+django-widget-tweaks = "*"
+markdown = "*"
 
 [dev-packages]
+django-extensions = "*"
+django-debug-toolbar = "*"
 
 [requires]
 python_version = "3.6"

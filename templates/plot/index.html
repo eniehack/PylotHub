@@ -1,0 +1,48 @@
+{% extends "plot/base.html" %}
+
+{% block title %}
+プロットをよもう。かこう。 - Plothub
+{% endblock %}
+
+{% block content %}
+<section class="hero is-medium">
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a href="/" class="navbar-item">
+            PlotHub
+          </a>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a href="{% url 'plot:create' %}" class="navbar-item">
+              新規作成
+            </a>
+            <a href="{% url 'plot:search' %}" class="navbar-item">
+              検索
+            </a>
+            {% if user.is_anonymous %}
+            <a href="{% url 'account:signup' %}" class="navbar-item">
+              登録
+            </a>
+            <a href="{% url 'account:signin' %}" class="navbar-item">
+              ログイン
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title">
+                PlotHub
+            </h1>
+            <h2 class="subtitle">
+                プロットをよもう。かこう。
+            </h2>
+        </div>
+    </div>
+</div>
+{% endblock %}

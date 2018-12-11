@@ -1,0 +1,8 @@
+{% extends 'plot/base.html' %}
+{% block content %}
+  <p>{{ object }}を削除していいですか？</p>
+  <form method="POST">
+      {% csrf_token %}
+      <button type="submit" class="button is-danger">削除する</button>
+  </form>
+{% endblock %}

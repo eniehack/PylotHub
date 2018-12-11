@@ -1,0 +1,10 @@
+{% if messages %}
+    {% for message in messages %}
+        <article class="message is-{% if message.tags == ERROR %}danger{% else %}{{ message.tags }}{% endif %}">
+            <div class="message-body">
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                {{ message }}
+            </li>
+        </article>
+    {% endfor %}
+{% endif %}
