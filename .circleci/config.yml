@@ -36,9 +36,16 @@ jobs:
             - "/usr/local/lib/python3.6/site-packages"
         
       - run:
+          name: initialize db
+          command: |
+          pipenv shell
+          python manage.py makemigrations
+          python manage.py migrate
+
+      - run:
           name: run tests
           command: |
-            pipenv run "python manage.py test"
+            pipenv run python manage.py test
 
       - store_artifacts:
           path: test-reports/
