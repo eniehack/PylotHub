@@ -38,9 +38,9 @@ jobs:
       - run:
           name: initialize db
           command: |
-          pipenv shell
-          python manage.py makemigrations
-          python manage.py migrate
+            pipenv shell
+            python manage.py makemigrations
+            python manage.py migrate
 
       - run:
           name: run tests
