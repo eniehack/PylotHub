@@ -18,12 +18,8 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
 
       - restore_cache:
-<<<<<<< HEAD
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-=======
-          key:
-          - deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
->>>>>>> 27d37149311fc6936a6a8c271a09bbe2903f6807
+          keys:
+            - deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
 
       - run:
           name: install dependencies
