@@ -1,5 +1,7 @@
 # PylotHub
 
+[![CircleCI](https://circleci.com/gh/eniehack/PylotHub/tree/master.svg?style=svg)](https://circleci.com/gh/eniehack/PylotHub/tree/master)
+
 ## 概要
 
 PylotHubはPlotHubのPython(Django)実装です。
