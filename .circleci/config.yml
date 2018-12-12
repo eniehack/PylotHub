@@ -5,6 +5,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/pylothub
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
@@ -46,7 +47,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            pipenv run "python manage.py test"
+            pipenv run python manage.py test
 
       - store_artifacts:
           path: test-reports/
