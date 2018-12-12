@@ -1,6 +1,8 @@
 # PylotHub
 
 [![CircleCI](https://circleci.com/gh/eniehack/PylotHub/tree/master.svg?style=svg)](https://circleci.com/gh/eniehack/PylotHub/tree/master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2d00e0e42c494b9980a4/maintainability)](https://codeclimate.com/github/eniehack/PylotHub/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2d00e0e42c494b9980a4/test_coverage)](https://codeclimate.com/github/eniehack/PylotHub/test_coverage)
 
 ## 概要
 
