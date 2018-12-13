@@ -13,6 +13,7 @@ markdown = "*"
 [dev-packages]
 django-extensions = "*"
 django-debug-toolbar = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.6"
