@@ -11,6 +11,7 @@ jobs:
       - image: circleci/python:3.6.1
         environment:
           PIPENV_VENV_IN_PROJECT: true
+          CC_TEST_REPORTER_ID: 9644d6a5115b63951aa8e98f4a12242f3346f36d84dc061c535105bfbec89546
 
     steps:
       - checkout
@@ -28,6 +29,12 @@ jobs:
             pipenv install
             pipenv install -dev
 
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+
       - save_cache:
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
@@ -44,7 +51,10 @@ jobs:
       - run:
           name: run tests
           command: |
-            pipenv run python manage.py test
+            pipenv run coverage run manage.py test
+            ./cc-test-reporter before-build
+            pipenv run coverage xml
+            ./cc-test-reporter after-build -t coverage.py --exit-code $?
 
       - store_artifacts:
           path: test-reports/
