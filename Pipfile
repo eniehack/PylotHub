@@ -9,10 +9,10 @@ django = "==1.11.15"
 django-allauth = "*"
 django-widget-tweaks = "*"
 markdown = "*"
-
-[dev-packages]
 django-extensions = "*"
 django-debug-toolbar = "*"
+
+[dev-packages]
 coverage = "*"
 
 [requires]
