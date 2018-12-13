@@ -2,6 +2,6 @@
 omit = 
     */tests/*
     */migrations/*
-    /.venv/*
+    .venv/*
     */__init__.py
     manage.py
