@@ -53,8 +53,8 @@ jobs:
           command: |
             pipenv run coverage run manage.py test
             ./cc-test-reporter before-build
-            pipenv run coverage report
-            ./cc-test-reporter after-build -t coverage.py
+            pipenv run coverage xml
+            ./cc-test-reporter after-build -t coverage.py --exit-code $?
 
       - store_artifacts:
           path: test-reports/
