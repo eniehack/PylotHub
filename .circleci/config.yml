@@ -51,9 +51,10 @@ jobs:
       - run:
           name: run tests
           command: |
-            ./cc-test-reporter before-build
             pipenv run coverage run manage.py test
-            ./cc-test-reporter after-build --coverage-input-type coverage.py
+            ./cc-test-reporter before-build
+            pipenv run coverage report
+            ./cc-test-reporter after-build -t coverage.py
 
       - store_artifacts:
           path: test-reports/
