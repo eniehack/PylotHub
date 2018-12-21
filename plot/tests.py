@@ -1,14 +1,43 @@
-from django.test import TestCase
-from accounts.models import User
+from django.test import LiveServerTestCase
+from selenium.webdriver.firefox.webdriver import WebDriver 
 
 
-class PlotViewTests(TestCase):
+class PlotViewTests(LiveServerTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.selenium = WebDriver()
+        super(PlotViewTests, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super(PlotViewTests, cls).tearDownClass()
 
     def test_get_index(self):
-        response = self.client.get('/plots/')
-        self.assertEqual(response.status_code, 200)
+        self.selenium.get('%s%s' % (self.live_server_url, '/plots/'))
+        self.assertEquals(u'プロットをよもう。かこう。 - Plothub', self.selenium.title)
 
-    def test_post_new_authenticated(self):
-        self.client.force_login(User.objects.create_user('tester'))
-        response = self.client.post('/plots/new', {'title': 'test', 'content': 'test'})
-        self.assertEqual(response.status_code, 200)
+    def test_login(self):
+        self.selenium.get('%s%s' % (self.live_server_url, '/accounts/login/'))
+        self.assertEquals(u'ログイン', self.selenium.title)
+
+        username_input = self.selenium.find_element_by_name('username')
+        username_input.send_keys('testuser')
+        password_input = self.selenium.find_element_by_name('password')
+        password_input.send_keys('test')
+        self.selenium.find_element_by_class_name('button is-success primaryAction').click()
+
+        self.assertEquals(u'', self.selenium.title)
+
+    def test_signup(self):
+        pass
+
+    def test_create(self):
+        pass
+
+    def test_delete(self):
+        pass
+
+    def test_edit(self):
+        pass
