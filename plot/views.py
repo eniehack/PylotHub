@@ -35,8 +35,7 @@ view_plot = ViewPlot.as_view()
 
 class CreatePlot(LoginRequiredMixin, CreateView):
 
-    # TODO: After successed signin, redirect here.
-    login_url = '/accounts/signin'
+    login_url = '/accounts/login'
     model = Plot
     form_class = CreateForm
     template_name = 'plot/create.html'
