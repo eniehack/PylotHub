@@ -5,7 +5,7 @@ from selenium import webdriver
 
 
 class AccountsViewTests(LiveServerTestCase):
-    fixtures = ['dump.json']
+    fixtures = ['user_dump.json']
 
     @classmethod
     def setUpClass(cls):
