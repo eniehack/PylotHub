@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.db.models import Q
+from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import \
@@ -14,7 +15,8 @@ class OnlyWriterPermissionMixin(UserPassesTestMixin):
 
     def test_func(self):
         user = self.request.user
-        return user.uuid == self.kwargs['pk'] or user.is_superuser
+        author = Plot.objects.get(pk=self.kwargs['pk'])
+        return user.username == str(author.user_id) or user.is_superuser
 
 
 class Index(TemplateView):
