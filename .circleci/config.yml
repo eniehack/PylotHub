@@ -21,14 +21,17 @@ jobs:
       - restore_cache:
           keys:
             - deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+        
+      - run: mkdir test-reports
 
       - run:
-          name: setup geckodriver
-          command: |
-            wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz
-            tar zxf geckodriver-v0.23.0-linux64.tar.gz
-            chmod 755 geckodriver
-            sudo cp geckodriver /usr/local/bin/
+          name: Download Selenium
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+
+      - run:
+          name: start Selenium
+          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
 
       - run:
           name: install dependencies
