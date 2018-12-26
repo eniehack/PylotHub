@@ -69,7 +69,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/plots/'
 
 TEMPLATES = [
     {
