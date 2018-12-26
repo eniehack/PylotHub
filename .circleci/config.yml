@@ -23,6 +23,14 @@ jobs:
             - deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
 
       - run:
+          name: setup geckodriver
+          command: |
+            wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz
+            tar zxf geckodriver-v0.23.0-linux64.tar.gz
+            chmod 755 geckodriver
+            sudo cp geckodriver /usr/local/bin/
+
+      - run:
           name: install dependencies
           command: |
             sudo pip install pipenv
