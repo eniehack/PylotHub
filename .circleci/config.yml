@@ -8,7 +8,7 @@ jobs:
     working_directory: ~/pylothub
     docker:
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.6.1-browsers
+      - image: circleci/python:3.6.6-browsers
         environment:
           PIPENV_VENV_IN_PROJECT: true
           CC_TEST_REPORTER_ID: 9644d6a5115b63951aa8e98f4a12242f3346f36d84dc061c535105bfbec89546
@@ -21,17 +21,23 @@ jobs:
       - restore_cache:
           keys:
             - deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-        
-      - run: mkdir test-reports
 
       - run:
-          name: Download Selenium
-          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+          name: Install and start geckodriver
+          command: |
+            wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz &&
+            tar -xvzf geckodriver* &&
+            chmod +x geckodriver &&
+            sudo mv geckodriver /usr/local/bin
 
       - run:
-          name: start Selenium
-          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-          background: true
+          name: Install the latest firefox
+          command: |
+            sudo apt-get remove firefox-mozilla-build binutils &&
+            sudo sh -c "echo 'deb http://ftp.hr.debian.org/debian sid main' >> /etc/apt/sources.list" &&
+            sudo apt-get update &&
+            sudo apt-get install -t sid firefox &&
+            firefox --version
 
       - run:
           name: install dependencies
