@@ -1,7 +1,7 @@
 {% extends 'plot/base.html' %}
 {% block title %}プロットの削除 - PlotHub{% endblock %}
 {% block content %}
-  <p>{{ object }}を削除していいですか？</p>
+  <p>『{{ object.title }}』を削除していいですか？</p>
   <form method="POST">
       {% csrf_token %}
       <button type="submit" class="button is-danger">削除する</button>
