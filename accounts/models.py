@@ -41,10 +41,9 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
 
-    uuid = models.UUIDField(_('uuid'), default=uuid.uuid4, editable=False, unique=True, primary_key=True)
-    userid = models.CharField(_('user id'), max_length=20, unique=True)
-    email = models.EmailField(_('email address'), unique=True)
-    username = models.CharField(_('user name'), max_length=150)
+    uuid = models.UUIDField('uuid', default=uuid.uuid4, primary_key=True)
+    username = models.CharField(_('user name'), max_length=20, unique=True)
+    email = models.EmailField(_('email address'), unique=True, blank=True)
     twitter = models.CharField('Twitter', max_length=15, null=True, blank=True)
     homepage = models.URLField(_('homepage'), null=True, blank=True)
 
@@ -61,8 +60,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     EMAIL_FIELD = 'email'
-    USERNAME_FIELD = 'userid'
-    REQUIRED_FIELDS = ['email','username']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
 
     class Meta:
         verbose_name = _('user')

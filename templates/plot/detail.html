@@ -15,7 +15,7 @@
   {{ object.get_content_as_markdown }}
 </div>
 <br />
-{% if request.user == object.user_id %}
+{% if request.user == object.user_id or request.user.is_superuser %}
 <div class="field is-grouped">
   <p class="control">
     <a class="button is-link" href="{{ object.plot_id }}/edit">編集する</a>
