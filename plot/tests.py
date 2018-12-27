@@ -1,3 +1,4 @@
+import time
 from django.contrib.auth import get_user_model
 from django.test import LiveServerTestCase
 from selenium.webdriver.common.by import By
@@ -25,7 +26,7 @@ class PlotViewTests(LiveServerTestCase):
         password_input = self.selenium.find_element_by_id('id_password')
         username_input.send_keys('testuser')
         password_input.send_keys('testpassword')
-        self.selenium.find_element_by_xpath('//form[button/@class="button is-success primaryAction"]')
+        self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
 
     def test_get_index(self):
         self.selenium.get('%s%s' % (self.live_server_url, '/plots/'))
@@ -37,20 +38,23 @@ class PlotViewTests(LiveServerTestCase):
 
     def test_create(self):
         self.login('/plots/new/')
-        wait = WebDriverWait(self.selenium, 10)
-        wait.until(EC.visibility_of_element_located((By.XPATH, 'textarea#id_content')))
+        #wait = WebDriverWait(self.selenium, 10)
+        #content_input = wait.until(EC.visibility_of_element_located((By.XPATH, '//textarea[@name="content"]')))
         self.assertEquals(u'プロットの新規作成 - PlotHub', self.selenium.title)
 
-        title_input = self.selenium.find_element_by_name('title')
-        genre_element = self.selenium.find_element_by_name('genre')
+        title_input = self.selenium.find_element_by_xpath('//input[@name="title"]')
+        genre_element = self.selenium.find_element_by_xpath('//select[@name="genre"]')
         genre_select_element = Select(genre_element)
-        content_input = self.selenium.find_element_by_name('content')
+        content_input = self.selenium.find_element_by_xpath('//textarea[@name="content"]')
 
+        title_input.clear()
         title_input.send_keys('test')
         genre_select_element.select_by_value('01')
-        content_input.send_keys('これはSeleniumを使ったテストです')
+        #time.sleep(5)
+        #content_input.clear()
+        #content_input.send_keys(u'これはSeleniumを使ったテストです')
 
-        self.selenium.find_element_by_xpath('//form[button/@type="submit"]').click()
+        self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
 
     def test_delete_not_authenticated(self):
         self.selenium.get('%s%s' % (self.live_server_url, '/plots/8273ef14-fb31-4bb6-8bf2-da1da066e718/delete'))
@@ -58,10 +62,10 @@ class PlotViewTests(LiveServerTestCase):
 
     def test_delete(self):
         self.login('/plots/8273ef14-fb31-4bb6-8bf2-da1da066e718/delete')
-        WebDriverWait(self.selenium, 10).until(EC.element_to_be_clickable((By.XPATH, '//form[button/@class="button is-danger"]')))
+        WebDriverWait(self.selenium, 10).until(EC.title_contains((u'削除')))
         self.assertEquals(u'プロットの削除 - PlotHub', self.selenium.title)
 
-        self.selenium.find_elements_by_xpath('//form[button/@type="submit"]').click()
+        self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
 
     def test_edit_not_authenticated(self):
         self.selenium.get('%s%s' % (self.live_server_url, '/plots/57abdc1a-598f-4ecd-9b26-7c20cacaed34/edit'))
@@ -69,10 +73,19 @@ class PlotViewTests(LiveServerTestCase):
 
     def test_edit(self):
         self.login('/plots/57abdc1a-598f-4ecd-9b26-7c20cacaed34/edit')
-        wait = WebDriverWait(self.selenium, 10)
-        element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'textarea#id_content')))
-        print(element)
         self.assertEquals(u'プロットの編集 - PlotHub', self.selenium.title)
 
-        self.selenium.find_elements_by_xpath('//form[button/@type="submit"]').click()
+        title_input = self.selenium.find_element_by_xpath('//input[@name="title"]')
+        genre_element = self.selenium.find_element_by_xpath('//select[@name="genre"]')
+        genre_select_element = Select(genre_element)
+        content_input = self.selenium.find_element_by_xpath('//textarea[@name="content"]')
+
+        title_input.clear()
+        title_input.send_keys('test')
+        genre_select_element.select_by_value('01')
+        #time.sleep(5)
+        #content_input.clear()
+        #content_input.send_keys(u'これはSeleniumを使ったテストです')
+
+        self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
         
