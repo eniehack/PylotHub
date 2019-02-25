@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "==1.11.18"
+django = ">=1.11.19"
 "argon2-cffi" = "*"
 django-allauth = "*"
 django-widget-tweaks = "*"
